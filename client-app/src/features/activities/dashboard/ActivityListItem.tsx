@@ -9,22 +9,22 @@ interface Props {
     activity: Activity
 }
 
-export default function  ActivityListItem({ activity }: Props) {
+export default function ActivityListItem({ activity }: Props) {
 
     return (
         <Segment.Group>
             <Segment>
                 {activity.isCancelled &&
-                    <Label attached='top' color='red' content='Cancelled' style={{textAlign: 'center'}} />
+                    <Label attached='top' color='red' content='Cancelled' style={{ textAlign: 'center' }} />
                 }
                 <Item.Group>
                     <Item>
-                        <Item.Image style={{marginBottom: 5}} size='tiny' circular src={require('../../../assets/user.png')} />
+                        <Item.Image style={{ marginBottom: 5 }} size='tiny' circular src={activity.host?.image || require('../../../assets/user.png')} />
                         <Item.Content>
                             <Item.Header as={Link} to={`/activities/${activity.id}`}>
                                 {activity.title}
                             </Item.Header>
-                            <Item.Description>Hosted by {activity.host?.displayName}</Item.Description>
+                            <Item.Description>Hosted by <Link to={`/profiles/${activity.host?.username}`} >{activity.host?.displayName}</Link> </Item.Description>
                             {activity.isHost && (
                                 <Item.Description>
                                     <Label basic color='orange' >
@@ -60,8 +60,8 @@ export default function  ActivityListItem({ activity }: Props) {
                     color='teal'
                     floated='right'
                     content='View'
-                    />
-                    
+                />
+
             </Segment>
         </Segment.Group>
     )
